@@ -6,7 +6,7 @@ The pairku page exists
 
 Pairku counts syllables when the value in the field changes
     Visit Home Page
-    Enter Haiku "Roses are reddish"
+    Enter Haiku "Roses be reddish"
     Haiku Syllable Count Should Be 5
 
 

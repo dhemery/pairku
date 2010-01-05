@@ -2,9 +2,12 @@
 %html
     %head
         %title Pairku
-        %script{:src =>'/js/counter.js'}
-		
+        %script{:src => '/counter.js'}
+
     %body
         %h1 Pairku
-        %textarea#pairku-editor
+        
+        %textarea#pairku-editor{:onchange => 'var sc = document.getElementById("syllable-count");sc.innerHTML = counter.count(this.value);'}
+        
         #syllable-count
+            0
