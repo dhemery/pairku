@@ -5,49 +5,57 @@ $report_dir = 'reports'
 
 ############################################################
 #
-#   Test Task:
+#   Test Tasks:
 #
-#       all             All tests (unit and acceptance)
+#       test            All tests (unit and acceptance).
 # 
-#       at(default)     Acceptance tests
+#       at              Acceptance tests.
 # 
 #       ut              Unit tests.
 #
 #   Utility Tasks:
 #
 #       clean           Removes temporary files
-#                       (account file and test reports)
 # 
-#       start           Starts the server app in the
+#       server:start    Starts the server app in the
 #                       background.
 #
 ############################################################
 
-task :default => [:at]
+task :default => [:test]
 
-task :all => [:ut, :at]
-task :at => [:temp_dirs]
-task :server => [:temp_dirs]
+task :at => [:cuke, :robot]
 task :temp_dirs => [$report_dir]
-task :ut => [:temp_dirs]
-
-task :at do
-    sh "pybot -d #{$report_dir} test/functional"
-end
+task :test => [:ut, :at]
+task :ut => [:jspec, :rspec]
 
 CLEAN.include $report_dir
 
-directory $report_dir
-
-task :server do
-    %x{ruby src/server.rb &> reports/server.log &}
+task :cuke => [:temp_dirs] do
 end
 
-Spec::Rake::SpecTask.new(:ut) do |t|
+task :jspec => [:temp_dirs] do
+    sh "jspec run --rhino test/unit/js/spec.rhino.js"
+end
+
+directory $report_dir
+
+task :robot => [:temp_dirs] do
+    sh "pybot -d #{$report_dir} test/functional"
+end
+
+task :rspec => [:temp_dirs]
+Spec::Rake::SpecTask.new(:rspec) do |t|
     t.spec_files = ["test/unit"]
     t.spec_opts = [
         "-c",
         "-f h:#{$report_dir}/spec.html",
         "-f specdoc",
         ]
+end
+
+namespace "server" do
+    task :start => [:temp_dirs] do
+        %x{shotgun -p 4567 app/server.rb &> reports/server.log &}
+    end
 end

@@ -1,4 +1,5 @@
 # Prerequisites
 
-Install the Rhino jar file somewhere in your CLASSPATH.
-http://www.mozilla.org/rhino/
+## Tests
+
+The JSpec tests require [Rhino](http://www.mozilla.org/rhino/). Include the Rhino jar file (js.jar) in your CLASSPATH.

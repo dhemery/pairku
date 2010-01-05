@@ -1,6 +1,6 @@
 
 load('/Library/Ruby/Gems/1.8/gems/jspec-2.11.13/lib/jspec.js')
-load('src/js/counter.js')
+load('app/js/counter.js')
 
 JSpec
 .exec('test/unit/js/spec.counter.js')
