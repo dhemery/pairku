@@ -1,3 +1,6 @@
+require 'rake/clean'
+require 'spec/rake/spectask'
+
 $report_dir = 'reports'
 
 ############################################################
@@ -20,16 +23,26 @@ $report_dir = 'reports'
 #
 ############################################################
 
-task :all => [:ut, :at]
-
-task :at => [:temp_dirs] do
-    sh "pybot -d #{$report_dir} atest"
-end
-
 task :default => [:at]
 
-require 'spec/rake/spectask'
+task :all => [:ut, :at]
+task :at => [:temp_dirs]
+task :server => [:temp_dirs]
+task :temp_dirs => [$report_dir]
 task :ut => [:temp_dirs]
+
+task :at do
+    sh "pybot -d #{$report_dir} test/functional"
+end
+
+CLEAN.include $report_dir
+
+directory $report_dir
+
+task :server do
+    %x{ruby src/server.rb &> reports/server.log &}
+end
+
 Spec::Rake::SpecTask.new(:ut) do |t|
     t.spec_files = ["test/unit"]
     t.spec_opts = [
@@ -38,16 +51,3 @@ Spec::Rake::SpecTask.new(:ut) do |t|
         "-f specdoc",
         ]
 end
-
-task :server => [:temp_dirs]
-
-task :server do
-    %x{ruby src/server.rb &> reports/server.log &}
-end
-
-task :temp_dirs => [$report_dir]
-
-directory $report_dir
-
-require 'rake/clean'
-CLEAN.include $report_dir
