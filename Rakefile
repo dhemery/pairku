@@ -15,7 +15,7 @@ $report_dir = 'reports'
 #
 #   Utility Tasks:
 #
-#       clean           Removes temporary files
+#       clean           Removes temporary files.
 # 
 #       server:start    Starts the server app in the
 #                       background.
@@ -24,11 +24,11 @@ $report_dir = 'reports'
 
 task :default => [:test]
 
-task :at => [:cuke, :robot]
-task :temp_dirs => [$report_dir]
 task :test => [:ut, :at]
+task :at => [:cuke, :robot]
 task :ut => [:jspec, :rspec]
 
+task :temp_dirs => [$report_dir]
 CLEAN.include $report_dir
 
 task :cuke => [:temp_dirs] do
