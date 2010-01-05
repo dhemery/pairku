@@ -17,7 +17,7 @@ Visit Home Page
     Go To   http://localhost:4567/pairku
 
 The Haiku Editor Should Be Visible
-    Page Should Contain Textfield   "#haiku-editor"
+    Page Should Contain Element   //textarea[@id='pairku-editor']
 
 Begin Session
     Start Selenium Server
