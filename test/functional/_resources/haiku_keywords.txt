@@ -1,0 +1,26 @@
+*** Settings ***
+Library     SeleniumLibrary
+
+*** Keywords ***
+
+Begin Session
+    Start Selenium Server
+    Open Browser    http://localhost:4567   safari
+#    Maximize Browser Window
+#    Set Selenium Speed      1s
+
+End Session
+    Close Browser
+    Shut Down Selenium Server
+
+Enter Haiku ${haiku}
+    Input Text  //textarea[@id='pairku-editor']     ${haiku}
+
+Haiku Editor Should Be Visible
+    Page Should Contain Element   //textarea[@id='pairku-editor']
+
+Haiku Syllable Count Should Be ${expected_syllable_count}
+    Element Should Contain   //div[@id='syllable-count']    ${expected_syllable_count}
+
+Visit Home Page
+    Go To   http://localhost:4567/pairku

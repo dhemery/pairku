@@ -1,0 +1,17 @@
+*** Settings ***
+Resource    _resources/haiku_keywords.txt
+Suite Setup     Begin Session
+Suite Teardown  End Session
+
+
+
+*** Test Cases ***
+
+The home page includes the haiku editor
+    Visit Home Page
+    Haiku Editor Should Be Visible
+
+Pairku counts syllables when the text in the editor changes
+    Visit Home Page
+    Enter Haiku "Roses be reddish"
+    Haiku Syllable Count Should Be 5
