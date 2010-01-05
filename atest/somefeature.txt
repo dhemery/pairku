@@ -1,0 +1,30 @@
+*** Test Cases ***
+
+The pairku page exists
+    Visit Home Page
+    The Haiku Editor Should Be Visible
+
+
+
+*** Settings ***
+Library     SeleniumLibrary
+Suite Setup     Begin Session
+Suite Teardown  End Session
+
+*** Keywords ***
+
+Visit Home Page
+    Go To   http://localhost:4567/pairku
+
+The Haiku Editor Should Be Visible
+    Page Should Contain Textfield   "#haiku-editor"
+
+Begin Session
+    Start Selenium Server
+    Open Browser    http://localhost:4567   safari
+    Maximize Browser Window
+    Set Selenium Speed      1s
+
+End Session
+    Close Browser
+    Shut Down Selenium Server
