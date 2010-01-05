@@ -4,6 +4,10 @@ The pairku page exists
     Visit Home Page
     The Haiku Editor Should Be Visible
 
+Pairku counts syllables when the value in the field changes
+    Visit Home Page
+    Enter Haiku "Roses are reddish"
+    Haiku Syllable Count Should Be 5
 
 
 *** Settings ***
@@ -12,6 +16,12 @@ Suite Setup     Begin Session
 Suite Teardown  End Session
 
 *** Keywords ***
+
+Enter Haiku ${haiku}
+    Input Text  //textarea[@id='pairku-editor']     ${haiku}
+
+Haiku Syllable Count Should Be ${expected_syllable_count}
+    Element Should Contain   //div[@id='syllable-count']    ${expected_syllable_count}
 
 Visit Home Page
     Go To   http://localhost:4567/pairku
