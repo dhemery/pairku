@@ -17,8 +17,11 @@ $report_dir = 'reports'
 #
 #       clean           Removes temporary files.
 # 
-#       server:start    Starts the server app in the
+#       server:bg       Starts the server app in the
 #                       background.
+#
+#       server:fg       Starts the server app in the
+#                       foreground.
 #
 ############################################################
 
@@ -55,7 +58,10 @@ Spec::Rake::SpecTask.new(:rspec) do |t|
 end
 
 namespace "server" do
-    task :start => [:temp_dirs] do
+    task :bg => [:temp_dirs] do
         %x{shotgun -p 4567 app/server.rb &> reports/server.log &}
+    end
+    task :fg => [:temp_dirs] do
+        %x{shotgun -p 4567 app/server.rb &> reports/server.log}
     end
 end
