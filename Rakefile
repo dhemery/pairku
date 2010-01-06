@@ -35,7 +35,7 @@ task :cuke => [:temp_dirs] do
 end
 
 task :jspec => [:temp_dirs] do
-    sh "jspec run --rhino test/unit/js/spec.rhino.js"
+    sh "jspec run --rhino test/unit/js/suite/rhino.js"
 end
 
 directory $report_dir
