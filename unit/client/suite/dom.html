@@ -2,11 +2,11 @@
 	<head>
 		<link type="text/css" rel="stylesheet" href="../lib/jspec.css" />
 		<script src="../lib/jspec.js"></script>
-		<script src="../../../../app/public/counter.js"></script>
+		<script src="../../../app/public/counter.js"></script>
 		<script>
 			function runSuites() { 
 				JSpec
-				.exec('spec.counter.js')
+				.exec('spec/counter.js')
 				.run()
 				.report()
 			}

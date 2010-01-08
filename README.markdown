@@ -1,5 +1,7 @@
-# Prerequisites
+# Pairku : A haiku validator
 
-## Tests
+## System Requirements
 
-The JSpec tests require [Rhino](http://www.mozilla.org/rhino/). Include the Rhino jar file (js.jar) in your CLASSPATH.
+**Tests** :
+The JSpec tests require [Rhino](http://www.mozilla.org/rhino/).
+Include the Rhino jar file (js.jar) in your CLASSPATH.

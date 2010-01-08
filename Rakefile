@@ -38,18 +38,18 @@ task :cuke => [:temp_dirs] do
 end
 
 task :jspec => [:temp_dirs] do
-    sh "jspec run --rhino test/unit/js/suite/rhino.js"
+    sh "jspec run --rhino unit/client/suite/rhino.js"
 end
 
 directory $report_dir
 
 task :robot => [:temp_dirs] do
-    sh "pybot -d #{$report_dir} test/functional"
+    sh "pybot -d #{$report_dir} atest"
 end
 
 task :rspec => [:temp_dirs]
 Spec::Rake::SpecTask.new(:rspec) do |t|
-    t.spec_files = ["test/unit"]
+    t.spec_files = ["unit/server"]
     t.spec_opts = [
         "-c",
         "-f h:#{$report_dir}/spec.html",
